@@ -18,6 +18,11 @@ public class UserService
 
   }
 
+  public async Task CreateUser(UserModel user)
+  {
+    await _userCollection.InsertOneAsync(user);
+    return;
+  }
 
   public async Task<List<UserModel>> GetUsers()
   {
@@ -26,5 +31,17 @@ public class UserService
     return users;
   }
 
+  public async Task<UserModel> GetUserId(string id)
+  {
+    var user = await _userCollection.Find(user => user.Id == id).FirstOrDefaultAsync();
+    if (user == null)
+    {
+      return null;
+    }
+    else
+    {
+      return user;
+    }
+  }
 
 }

@@ -32,5 +32,11 @@ public class AuthController : ControllerBase
     return await _userService.GetUsers();
   }
 
+  [HttpGet("user/{id}"), Authorize]
+  public async Task<UserModel> Get(string id)
+  {
+    return await _userService.GetUserId(id);
+  }
+
 
 }
