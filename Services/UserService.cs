@@ -31,7 +31,7 @@ public class UserService
     return users;
   }
 
-  public async Task<UserModel> GetUserId(string id)
+  public async Task<UserModel> GetUserById(string id)
   {
     var user = await _userCollection.Find(user => user.Id == id).FirstOrDefaultAsync();
     if (user == null)
@@ -43,5 +43,22 @@ public class UserService
       return user;
     }
   }
+
+  public async Task<UserModel> GetUserByEmail(string email)
+  {
+    var user = await _userCollection.Find(user => user.email == email).FirstOrDefaultAsync();
+    if (user == null)
+    {
+      return null;
+    }
+    else
+    {
+      return user;
+    }
+  }
+
+
+
+
 
 }
