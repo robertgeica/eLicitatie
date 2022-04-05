@@ -23,3 +23,12 @@ if (localStorage["userId"] && localStorage["auth-token"]) {
     products: [...products],
   });
 }
+
+// pages
+const isLoginPage = window.location.pathname === "/client/login.html";
+const isRegisterPage = window.location.pathname === "/client/register.html";
+
+// prevent access to login/register page if user is already logged-in
+if (localStorage["auth-token"] && (isLoginPage || isRegisterPage)) {
+  redirectToPage("http://127.0.0.1:5500/client/index.html");
+}
