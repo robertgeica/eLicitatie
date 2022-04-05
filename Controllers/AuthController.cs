@@ -35,7 +35,7 @@ public class AuthController : ControllerBase
   [HttpGet("user/{id}"), Authorize]
   public async Task<UserModel> Get(string id)
   {
-    return await _userService.GetUserId(id);
+    return await _userService.GetUserById(id);
   }
 
 
@@ -85,5 +85,49 @@ public class AuthController : ControllerBase
       return computedHash.SequenceEqual(passwordHash);
     }
   }
+
+
+  [HttpPost("login")]
+  [EnableCors(origins: "*", headers: "*", methods: "*")]
+  public async Task<ActionResult<string>> Login(UserLoginDto request)
+  {
+    var userr = await _userService.GetUserByEmail(request.email);
+
+    if (userr == null)
+    {
+      return BadRequest("User not found.");
+    }
+
+    if (!VerifyPasswordHash(request.password, userr.passwordHash, userr.passwordSalt))
+    {
+      return BadRequest("Wrong password.");
+    }
+
+    string token = CreateToken(userr);
+    return Ok(new { token, userr });
+  }
+
+
+  private string CreateToken(UserModel user)
+  {
+    List<Claim> claims = new List<Claim> {
+      new Claim(ClaimTypes.Email, user.email),
+    };
+
+    var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+        _configuration.GetSection("AppSettings:Token").Value));
+
+    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+    var token = new JwtSecurityToken(
+        claims: claims,
+        expires: DateTime.Now.AddDays(1),
+        signingCredentials: creds);
+
+    var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+    return jwt;
+  }
+
 
 }
