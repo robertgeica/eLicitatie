@@ -39,4 +39,51 @@ public class AuthController : ControllerBase
   }
 
 
+  [HttpPost("register")]
+  public async Task<ActionResult<UserModel>> Register(UserDto request)
+  {
+    CreatePasswordHash(request.password, out byte[] passwordHash, out byte[] passwordSalt);
+
+    var existingUsers = await getAllUsers();
+
+    if (existingUsers.Count > 0)
+    {
+      user.role = "user";
+    }
+    else
+    {
+      user.role = "admin";
+    }
+
+    user.email = request.email;
+    user.firstName = request.firstName;
+    user.lastName = request.lastName;
+    user.productsIds = request.productsIds;
+    user.offersIds = request.offersIds;
+    user.passwordHash = passwordHash;
+    user.passwordSalt = passwordSalt;
+
+    await _userService.CreateUser(user);
+    return Ok(user);
+  }
+
+
+  private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+  {
+    using (var hmac = new HMACSHA512())
+    {
+      passwordSalt = hmac.Key;
+      passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+    }
+  }
+
+  private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+  {
+    using (var hmac = new HMACSHA512(passwordSalt))
+    {
+      var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+      return computedHash.SequenceEqual(passwordHash);
+    }
+  }
+
 }
