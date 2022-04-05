@@ -57,8 +57,17 @@ public class UserService
     }
   }
 
+  public async Task EditUser(string id, string firstName, string lastName, List<string> productsIds, List<OffersIds> offersIds)
+  {
+    FilterDefinition<UserModel> filter = Builders<UserModel>.Filter.Eq("Id", id);
+    UpdateDefinition<UserModel> update = Builders<UserModel>.Update
+        .Set("firstName", firstName)
+        .Set("lastName", lastName)
+        .Set("productsIds", productsIds)
+        .Set("offersIds", offersIds);
 
-
-
+    await _userCollection.UpdateOneAsync(filter, update);
+    return;
+  }
 
 }
