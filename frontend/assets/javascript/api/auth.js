@@ -75,5 +75,20 @@ const logout = () => {
   redirectToPage("http://127.0.0.1:5500/client/login.html");
 };
 
+const updateUser = (id, newUser) => {
+  fetch(`http://localhost:5146/api/user/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `bearer ${localStorage["auth-token"]}`,
+    },
+    body: JSON.stringify(newUser),
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
+};
 
-export { login, register, logout, getUser };
+export { login, register, logout, getUser, updateUser };
