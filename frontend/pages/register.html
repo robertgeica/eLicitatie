@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eLicitatie</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body>
+    <script type="module" src="../assets/javascript/app.js"></script>
+    <header class="header">
+      <nav class="navbar">
+        <a class="title" href="./index.html">eLicitatie</a>
+
+        <div class="links" id="no-auth">
+          <a class="link" href="./login.html">Login</a>
+        </div>
+        <div class="links" id="auth">
+          <a class="link" id="logout-button">Logout</a>
+        </div>
+      </nav>
+    </header>
+    <main class="main">
+      <div class="wave-wrapper">
+        <div class="auth-container">
+          <h1 class="title">Register</h1>
+          <form class="auth-form">
+            <input
+              id="user-email"
+              type="email"
+              class="input"
+              placeholder="Email Adress"
+              name="email"
+            />
+
+            <input
+              id="user-firstname"
+              type="firstname"
+              class="input"
+              placeholder="First name"
+              name="firstname"
+            />
+
+            <input
+              id="user-lastname"
+              type="lastname"
+              class="input"
+              placeholder="Last name"
+              name="lastname"
+            />
+
+            <input
+              id="user-password"
+              type="password"
+              class="input"
+              placeholder="Password"
+              name="password"
+              minlength="6"
+            />
+
+            <input
+              type="button"
+              id="register-button"
+              class="button"
+              value="Register"
+            />
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer class="footer"></footer>
+  </body>
+</html>

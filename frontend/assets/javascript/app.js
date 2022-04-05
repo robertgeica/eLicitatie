@@ -25,10 +25,47 @@ if (localStorage["userId"] && localStorage["auth-token"]) {
 }
 
 // pages
-const isLoginPage = window.location.pathname === "/client/login.html";
-const isRegisterPage = window.location.pathname === "/client/register.html";
+const isLoginPage = window.location.pathname === "/frontend/pages/login.html";
+const isRegisterPage = window.location.pathname === "/frontend/pages/register.html";
 
 // prevent access to login/register page if user is already logged-in
 if (localStorage["auth-token"] && (isLoginPage || isRegisterPage)) {
   redirectToPage("http://127.0.0.1:5500/client/index.html");
 }
+
+
+// get DOM elements for login/register form
+const userEmail = document.getElementById("user-email");
+const userPassword = document.getElementById("user-password");
+const userFirstname = document.getElementById("user-firstname");
+const userLastname = document.getElementById("user-lastname");
+const logoutButton = document.getElementById("logout-button");
+
+if (isLoginPage) {
+  const loginButton = document.getElementById("login-button");
+  loginButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    console.log(userEmail, userPassword.value);
+    await login(userEmail.value, userPassword.value);
+  });
+}
+
+if (isRegisterPage) {
+  const registerButton = document.getElementById("register-button");
+  registerButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    await register(
+      userEmail.value,
+      userFirstname.value,
+      userLastname.value,
+      userPassword.value
+    );
+  });
+}
+
+
+logoutButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  logout();
+});

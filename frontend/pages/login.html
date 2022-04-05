@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eLicitatie</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <script type="module" src="../assets/javascript/app.js" ></script>
+  <header class="header">
+    <nav class="navbar">
+      <a class="title" href="./index.html">eLicitatie</a>
+
+      <div class="links" id="not-auth">
+        <a class="link" href="./register.html">Register</a>
+      </div>
+      <div class="links" id="auth">
+        <a class="link" id="logout-button">Logout</a>
+      </div>
+    </nav>
+  </header>
+  <main class="main">
+    <div class="wave-wrapper">
+
+      <div class="auth-container">
+        <h1 class="title">Login</h1>
+        <form class="auth-form">
+          <input
+            id="user-email"
+            type="email"
+            class="input"
+            placeholder="Email Adress"
+            name="email"
+          />
+
+          <input
+            id="user-password"
+            type="password"
+            class="input"
+            placeholder="Password"
+            name="password"
+            minLength="6"
+          />
+
+          <input type="button" id="login-button" class="button" value="Login"/>
+        </form>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+
+  </footer>
+</body>
+</html>

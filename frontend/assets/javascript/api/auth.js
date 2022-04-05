@@ -10,7 +10,7 @@ const register = async (email, firstName, lastName, password) => {
     productsIds: [],
   };
 
-  fetch("http://localhost:5146/api/register", {
+  fetch("http://localhost:7241/api/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +28,7 @@ const login = async (email, password) => {
     password: password,
   };
 
-  fetch("http://localhost:5146/api/login", {
+  fetch("http://localhost:7241/api/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -49,7 +49,7 @@ const login = async (email, password) => {
 };
 
 const getUser = async (id) => {
-  return fetch(`http://localhost:5146/api/user/${id}`, {
+  return fetch(`http://localhost:7241/api/user/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const logout = () => {
 };
 
 const updateUser = (id, newUser) => {
-  fetch(`http://localhost:5146/api/user/${id}`, {
+  fetch(`http://localhost:7241/api/user/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

@@ -55,3 +55,55 @@
   display: block;
 }
 
+/* Login & Register page*/
+.wave-wrapper {
+  height: 100vh;
+  background: url(../css/wave.svg) no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-container {
+  padding: 2em;
+  box-shadow: rgba(152, 155, 158, 0.3) 0px 6px 12px;
+  border-radius: 8px;
+  gap: 0.8em;
+  display: grid;
+  gap: 1rem;
+  width: 60%;
+  max-width: 600px;
+  background-color: white;
+}
+
+.auth-form {
+  width: 80%;
+  margin: auto;
+  gap: 0.8em;
+  display: grid;
+  gap: 1rem;
+}
+
+.input {
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 6px;
+  padding: 0.6em;
+  margin: 0.2em;
+}
+
+.input:focus {
+  outline-color: #a0c9ff;
+}
+.input-container {
+  position: relative;
+}
+
+.form-container {
+  margin-top: 2em;
+}
+
+.form-container .form-title {
+  padding: .4em 0;
+}
+
