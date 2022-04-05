@@ -33,7 +33,7 @@ public class AuthController : ControllerBase
   }
 
   [HttpGet("user/{id}"), Authorize]
-  public async Task<UserModel> Get(string id)
+  public async Task<UserModel> GetUser(string id)
   {
     return await _userService.GetUserById(id);
   }
@@ -129,5 +129,18 @@ public class AuthController : ControllerBase
     return jwt;
   }
 
+
+  [HttpPut("user/{id}"), Authorize]
+  public async Task<IActionResult> UpdateUser(string id, [FromBody] UserDto user)
+  {
+
+    string firstName = user.firstName;
+    string lastName = user.lastName;
+    List<string> productsIds = user.productsIds;
+    List<OffersIds> offersIds = user.offersIds;
+
+    await _userService.EditUser(id, firstName, lastName, productsIds, offersIds);
+    return Ok(user);
+  }
 
 }
