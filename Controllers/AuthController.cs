@@ -136,7 +136,7 @@ public class AuthController : ControllerBase
 
     string firstName = user.firstName;
     string lastName = user.lastName;
-    List<string> productsIds = user.productsIds;
+    List<ProductIds> productsIds = user.productsIds;
     List<OffersIds> offersIds = user.offersIds;
 
     await _userService.EditUser(id, firstName, lastName, productsIds, offersIds);
