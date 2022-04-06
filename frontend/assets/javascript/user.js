@@ -84,7 +84,7 @@ const addNewProduct = (store) => {
       auctionType,
       description,
       imageUrl,
-      categories: categoriesArr,
+      categories: selectedCategories,
     };
 
     addProduct(product);
