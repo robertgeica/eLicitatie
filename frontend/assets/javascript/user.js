@@ -9,22 +9,27 @@ if (localStorage["userId"] && localStorage["auth-token"]) {
   const { id, email, firstName, lastName, role, offersIds, productsIds } = user;
   let categories = await getCategories().then((response) => response);
   let products = await getProducts().then((response) => response);
+  let userProducts = await getUserProducts(user).then((response) => response);
 
   setStore({
     ...store(),
     user: { id, email, firstName, lastName, role, offersIds, productsIds },
     categories: [...categories],
     products: [...products],
+    userProducts: [...userProducts],
   });
 }
+
 const updateProfileInfos = (store) => {
   document.getElementById("userId").innerHTML = store.user.id;
   document.getElementById("userEmail").innerHTML = store.user.email;
-  document.getElementById(
-    "userFullName"
-  ).innerHTML = `${store.user.firstName} ${store.user.lastName}`;
-  document.getElementById("userProductsIds").innerHTML = store.user.productsIds;
+  document.getElementById( "userFullName").innerHTML = `${store.user.firstName} ${store.user.lastName}`;
+  const products = store.userProducts.map(
+    (product) => `<span>${product.name}</span>`
+  );
+  document.getElementById("userProductsIds").innerHTML = products;
   document.getElementById("userOffersIds").innerHTML = store.user.offersIds[0];
+
 };
 
 const addNewProduct = (store) => {

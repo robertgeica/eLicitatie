@@ -14,7 +14,7 @@ namespace eLicitatie.Models
     public string lastName { get; set; } = string.Empty;
     public string role { get; set; } = string.Empty;
     public string password { get; set; } = string.Empty;
-    public List<ProductIds> productsIds { get; set; } = null!;
+    public List<string> productsIds { get; set; } = null!;
     public List<OffersIds> offersIds { get; set; } = null!;
   }
 }

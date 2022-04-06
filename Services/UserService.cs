@@ -57,7 +57,7 @@ public class UserService
     }
   }
 
-  public async Task EditUser(string id, string firstName, string lastName, List<ProductIds> productsIds, List<OffersIds> offersIds)
+  public async Task EditUser(string id, string firstName, string lastName, List<string> productsIds, List<OffersIds> offersIds)
   {
     FilterDefinition<UserModel> filter = Builders<UserModel>.Filter.Eq("Id", id);
     UpdateDefinition<UserModel> update = Builders<UserModel>.Update

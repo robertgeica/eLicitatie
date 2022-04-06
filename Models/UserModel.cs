@@ -14,15 +14,9 @@ public class UserModel
   public string role { get; set; } = string.Empty;
   public byte[] passwordHash { get; set; } = null!;
   public byte[] passwordSalt { get; set; } = null!;
-  public List<ProductIds> productsIds { get; set; } = null!;
+  public List<string> productsIds { get; set; } = null!;
   public List<OffersIds> offersIds { get; set; } = null!;
 
-}
-
-public class ProductIds
-{
-  public string productId { get; set; }
-  public string value { get; set; }
 }
 
 public class OffersIds
