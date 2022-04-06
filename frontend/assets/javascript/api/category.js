@@ -1,7 +1,7 @@
 
 const getCategories = async () => {
 
-  return fetch("http://localhost:5146/api/category", {
+  return fetch("http://localhost:5275/api/category", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -23,7 +23,7 @@ const addCategory = async (name, subcategories) => {
     subcategories,
   };
 
-  fetch("http://localhost:5146/api/category", {
+  fetch("http://localhost:5275/api/category", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -38,7 +38,7 @@ const addCategory = async (name, subcategories) => {
 
 const deleteCategory = async (id) => {
 
-  return fetch(`http://localhost:5146/api/category/${id}`, {
+  return fetch(`http://localhost:5275/api/category/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
