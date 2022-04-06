@@ -1,5 +1,7 @@
 import { login, logout, register, getUser } from "./api/auth.js";
 import { redirectToPage } from "./utils.js";
+import { addProduct, getProducts, getUserProducts } from "./api/product.js";
+import { getCategories } from './api/category.js';
 import { store, setStore } from "./store/store.js";
 
 // show/hide navbar links
@@ -13,14 +15,14 @@ if (localStorage["auth-token"]) {
 if (localStorage["userId"] && localStorage["auth-token"]) {
   let user = await getUser(localStorage["userId"]).then((response) => response);
   const { id, email, firstName, lastName, role, offersIds, productsIds } = user;
-  // let categories = await getCategories().then((response) => response);
-  // let products = await getProducts().then((response) => response);
+  let categories = await getCategories().then((response) => response);
+  let products = await getProducts().then((response) => response);
 
   setStore({
     ...store(),
     user: { id, email, firstName, lastName, role, offersIds, productsIds },
     // categories: [...categories],
-    // products: [...products],
+    products: [...products],
   });
 }
 
