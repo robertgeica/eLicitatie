@@ -21,7 +21,7 @@ if (localStorage["userId"] && localStorage["auth-token"]) {
   setStore({
     ...store(),
     user: { id, email, firstName, lastName, role, offersIds, productsIds },
-    // categories: [...categories],
+    categories: [...categories],
     products: [...products],
   });
 }
