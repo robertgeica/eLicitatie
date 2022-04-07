@@ -103,7 +103,7 @@ tr:nth-child(even) {
   gap: 1rem;
 }
 
-.input {
+.input, .select {
   border: 1px solid rgb(221, 221, 221);
   border-radius: 6px;
   padding: 0.6em;
@@ -133,6 +133,7 @@ tr:nth-child(even) {
   height: 100%;
 }
 
+#add-product-btn,
 #add-product-modal-btn,
 #products-modal-btn,
 #add-category-btn,
@@ -151,6 +152,7 @@ tr:nth-child(even) {
   text-align: center;
 }
 
+#add-product-btn:hover,
 #add-product-modal-btn:hover,
 #products-modal-btn:hover,
 #add-category-btn:hover,

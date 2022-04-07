@@ -35,7 +35,7 @@ const updateProfileInfos = (store) => {
 };
 
 const addNewProduct = (store) => {
-  const addProductBtn = document.getElementById("add-product");
+  const addProductBtn = document.getElementById("add-product-btn");
   const selectCategory = document.getElementById("select-category");
   store.categories.forEach((categ) => {
     categ.subcategories.forEach((subcateg) => {
