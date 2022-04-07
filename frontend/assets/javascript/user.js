@@ -28,7 +28,9 @@ const updateProfileInfos = (store) => {
     (product) => `<span>${product.name}</span>`
   );
   document.getElementById("userProductsIds").innerHTML = products;
-  document.getElementById("userOffersIds").innerHTML = store.user.offersIds[0];
+
+  const offers = store.user.offersIds.map(offer => `<span>${offer.value}</span>`)
+  document.getElementById("userOffersIds").innerHTML = offers;
 
 };
 
@@ -131,9 +133,11 @@ const viewProducts = (store) => {
       `
     <tr>
       <td>${product.name}</td>
-      <td>${product.startDate} - ${product.endDate}</td>
-      <td>${product.startPrice} - ${
-        product.offers[product.offers.length - 1]
+      <td>${product.startDate}</td>
+      <td>${product.endDate}</td>
+      <td>${product.startPrice}</td>
+      <td>${
+        product.offers[product.offers.length - 1] || 0
       }</td>
       <td>${product.offers.length}</td>
     </tr>
@@ -145,11 +149,13 @@ const viewProducts = (store) => {
       <table>
         <tr>
           <th>Name</th>
-          <th>Start date - end date</th>
-          <th>Start price - Last price</th>
+          <th>Start date</th>
+          <th>End date</th>
+          <th>Start price</th>
+          <th>Last price</th>
           <th>Total offers</th>
         </tr>
-        ${tableRows}
+        ${tableRows.join('')}
       </table>
     </div>`;
 

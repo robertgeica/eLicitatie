@@ -121,6 +121,7 @@ tr:nth-child(even) {
 
 .form-container {
   margin-top: 2em;
+  min-width: 60%;
 }
 
 .form-container .form-title {
@@ -132,7 +133,31 @@ tr:nth-child(even) {
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-width: 20em;
+}
+
+#add-product-modal-btn, #products-modal-btn {
+  transition: 0.15s all ease-in-out;
+  cursor: pointer;
+
+  background: #898989;
+  border-radius: 30px;
+  border: none;
+  color: #fff;
+  padding: 7px;
+  margin: 5px 2px 0 0;
+  text-decoration: none;
+}
+
+#add-product-modal-btn:hover, #products-modal-btn:hover {
+  background: #a8a4a4;
+}
+
+#products-modal-content {
+}
+
+.product-table {
+  width: 100%;
+  margin-top: 5em;
 }
 
 /* Modal */
@@ -150,9 +175,10 @@ tr:nth-child(even) {
 }
 
 .modal-content {
+  border: 1px solid red;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
@@ -167,6 +193,7 @@ tr:nth-child(even) {
   float: right;
   font-size: 28px;
   font-weight: bold;
+  align-self: flex-end;
 }
 
 .close-product:hover,
