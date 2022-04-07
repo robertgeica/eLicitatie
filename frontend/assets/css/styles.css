@@ -136,7 +136,8 @@ tr:nth-child(even) {
 #add-product-modal-btn,
 #products-modal-btn,
 #add-category-btn,
-#add-subcategory-btn {
+#add-subcategory-btn,
+.delete-category-btn {
   transition: 0.15s all ease-in-out;
   cursor: pointer;
 
@@ -147,12 +148,14 @@ tr:nth-child(even) {
   padding: 7px;
   margin: 5px 2px 0 0;
   text-decoration: none;
+  text-align: center;
 }
 
 #add-product-modal-btn:hover,
 #products-modal-btn:hover,
 #add-category-btn:hover,
-#add-subcategory-btn:hover {
+#add-subcategory-btn:hover,
+.delete-category-btn:hover {
   background: #a8a4a4;
 }
 
@@ -229,14 +232,7 @@ tr:nth-child(even) {
   border-bottom: 1px solid black;
 }
 
-.delete-category {
-  background-color: #369ee4;
-  border-radius: 5px;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  transition-duration: 0.4s;
+.delete-category-btn {
   margin-top: auto;
 }
 

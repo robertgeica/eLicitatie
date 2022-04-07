@@ -63,7 +63,7 @@ const renderCategories = () => {
         <div class="subcategories-box">
         ${subcategories.join("\n")}
         </div>
-        <span class="delete-category" data-id="${
+        <span class="delete-category-btn" data-id="${
           category.id
         }">Delete category</span>
       </div>
@@ -73,7 +73,7 @@ const renderCategories = () => {
 };
 
 const addDeleteCategory = () => {
-  document.querySelectorAll(".delete-category").forEach((category) =>
+  document.querySelectorAll(".delete-category-btn").forEach((category) =>
     category.addEventListener("click", (e) => {
       e.preventDefault();
       const categoryId = e.target.getAttribute("data-id");
