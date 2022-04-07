@@ -71,3 +71,10 @@ logoutButton.addEventListener("click", (e) => {
   e.preventDefault();
   logout();
 });
+
+// if user role is admin, display admin page link
+if (store().user.role === "admin") {
+  const adminLink = `<a class="link" href="./admin.html">Admin</a>`;
+  const authContainer = document.getElementById("auth");
+  authContainer.innerHTML = adminLink + authContainer.innerHTML;
+}
