@@ -74,7 +74,7 @@ logoutButton.addEventListener("click", (e) => {
 
 // if user role is admin, display admin page link
 if (store().user.role === "admin") {
-  const adminLink = `<a class="link" href="./admin.html">Admin</a>`;
+  const adminLink = `<a class="link" href="../pages/admin.html">Admin</a>`;
   const authContainer = document.getElementById("auth");
   authContainer.innerHTML = adminLink + authContainer.innerHTML;
 }
