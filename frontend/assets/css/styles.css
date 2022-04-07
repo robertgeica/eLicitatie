@@ -73,8 +73,6 @@ tr:nth-child(even) {
 .footer {
 }
 
-
-
 /* Login & Register page*/
 .wave-wrapper {
   height: 100vh;
@@ -135,7 +133,10 @@ tr:nth-child(even) {
   height: 100%;
 }
 
-#add-product-modal-btn, #products-modal-btn {
+#add-product-modal-btn,
+#products-modal-btn,
+#add-category-btn,
+#add-subcategory-btn {
   transition: 0.15s all ease-in-out;
   cursor: pointer;
 
@@ -148,7 +149,10 @@ tr:nth-child(even) {
   text-decoration: none;
 }
 
-#add-product-modal-btn:hover, #products-modal-btn:hover {
+#add-product-modal-btn:hover,
+#products-modal-btn:hover,
+#add-category-btn:hover,
+#add-subcategory-btn:hover {
   background: #a8a4a4;
 }
 
@@ -201,4 +205,41 @@ tr:nth-child(even) {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* Admin page */
+#categoryContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.category-box {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+  margin: 1em;
+  border-radius: 10px;
+  border: 1px solid black;
+  min-width: 7em;
+}
+
+.category-name {
+  color: black;
+  margin-bottom: 16px;
+  border-bottom: 1px solid black;
+}
+
+.delete-category {
+  background-color: #369ee4;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  margin-top: auto;
+}
+
+#subcategory {
+  display: block;
 }
