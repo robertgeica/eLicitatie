@@ -1,7 +1,7 @@
 import { login, logout, register, getUser } from "./api/auth.js";
 import { redirectToPage } from "./utils.js";
 import { addProduct, getProducts, getUserProducts } from "./api/product.js";
-import { getCategories } from './api/category.js';
+import { getCategories } from "./api/category.js";
 import { store, setStore } from "./store/store.js";
 
 // show/hide navbar links
@@ -28,13 +28,13 @@ if (localStorage["userId"] && localStorage["auth-token"]) {
 
 // pages
 const isLoginPage = window.location.pathname === "/frontend/pages/login.html";
-const isRegisterPage = window.location.pathname === "/frontend/pages/register.html";
+const isRegisterPage =
+  window.location.pathname === "/frontend/pages/register.html";
 
 // prevent access to login/register page if user is already logged-in
 if (localStorage["auth-token"] && (isLoginPage || isRegisterPage)) {
   redirectToPage("http://127.0.0.1:5500/client/index.html");
 }
-
 
 // get DOM elements for login/register form
 const userEmail = document.getElementById("user-email");
@@ -66,7 +66,6 @@ if (isRegisterPage) {
   });
 }
 
-
 logoutButton.addEventListener("click", (e) => {
   e.preventDefault();
   logout();
@@ -74,7 +73,10 @@ logoutButton.addEventListener("click", (e) => {
 
 // if user role is admin, display admin page link
 if (store().user.role === "admin") {
-  const adminLink = `<a class="link" href="../pages/admin.html">Admin</a>`;
+  const isHomepage = window.location.pathname === "/frontend/index.html";
+  const adminLink = `<a class="link" href="${
+    isHomepage ? "./pages/admin.html" : "../pages/admin.html"
+  }">Admin</a>`;
   const authContainer = document.getElementById("auth");
   authContainer.innerHTML = adminLink + authContainer.innerHTML;
 }
