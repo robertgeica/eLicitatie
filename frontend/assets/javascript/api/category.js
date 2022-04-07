@@ -1,20 +1,18 @@
-
 const getCategories = async () => {
-
   return fetch("http://localhost:5275/api/category", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `bearer ${localStorage['auth-token']}`
-    }
+      Authorization: `bearer ${localStorage["auth-token"]}`,
+    },
   })
-  .then((response) => response.text())
-  .then((data) => {
-    const res = JSON.parse(data);
+    .then((response) => response.text())
+    .then((data) => {
+      const res = JSON.parse(data);
 
-    return res;
-  })
-  .catch((err) => console.log(err));
+      return res;
+    })
+    .catch((err) => console.log(err));
 };
 
 const addCategory = async (name, subcategories) => {
@@ -27,7 +25,7 @@ const addCategory = async (name, subcategories) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `bearer ${localStorage['auth-token']}`
+      Authorization: `bearer ${localStorage["auth-token"]}`,
     },
     body: JSON.stringify(data),
   })
@@ -37,21 +35,16 @@ const addCategory = async (name, subcategories) => {
 };
 
 const deleteCategory = async (id) => {
-
   return fetch(`http://localhost:5275/api/category/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `bearer ${localStorage['auth-token']}`
-    }
+      Authorization: `bearer ${localStorage["auth-token"]}`,
+    },
   })
-  .then((response) => response.text())
-  .then((data) => {
-    const res = JSON.parse(data);
-
-    return res;
-  })
-  .catch((err) => console.log(err));
+    .then((response) => response.text())
+    .then((data) => {})
+    .catch((err) => console.log(err));
 };
 
 export { getCategories, addCategory, deleteCategory };
