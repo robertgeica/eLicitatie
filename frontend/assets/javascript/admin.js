@@ -51,7 +51,7 @@ const addCategoryForm = () => {
 };
 
 const renderCategories = () => {
-  const categoryContainer = document.getElementById("categoryContainer");
+  const categoryContainer = document.getElementById("category-container");
   store().categories.forEach((category) => {
     const subcategories = category.subcategories.map(
       (subcategory) => `<p class="subcategory">${subcategory}</p>`
@@ -65,7 +65,7 @@ const renderCategories = () => {
         </div>
         <span class="delete-category-btn" data-id="${
           category.id
-        }">Delete category</span>
+        }">Delete</span>
       </div>
     `;
     categoryContainer.innerHTML = categoryHtml + categoryContainer.innerHTML;

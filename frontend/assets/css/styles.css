@@ -213,9 +213,9 @@ tr:nth-child(even) {
 }
 
 /* Admin page */
-#categoryContainer {
+#category-container {
   display: flex;
-  justify-content: space-evenly;
+  overflow: auto;
 }
 
 .category-box {
