@@ -241,3 +241,30 @@ tr:nth-child(even) {
 #subcategory {
   display: block;
 }
+
+
+/* Auctions */
+#auctions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  transition: 0.3s;
+  justify-items: center;
+}
+
+.auction-container { 
+  margin: 2em 0 0 0;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  width: 80%;
+}
+.auction-container:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.auction-container img {
+  width: 100%;
+}
+
+.text-content {
+  text-align: left;
+  padding: 10px;
+}
