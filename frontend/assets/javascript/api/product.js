@@ -18,6 +18,28 @@ const getProducts = async () => {
     .catch((err) => console.log(err));
 };
 
+const getProduct = async (id) => {
+  return fetch(`http://localhost:5275/api/product/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `bearer ${localStorage["auth-token"]}`,
+    },
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      const res = JSON.parse(data);
+      setStore({
+        ...store(),
+        product: res,
+      });
+      console.log(store());
+
+      return res;
+    })
+    .catch((err) => console.log(err));
+};
+
 const addProduct = async (product) => {
   const {
     userId,
@@ -88,4 +110,4 @@ const getUserProducts = async (user) => {
     console.log(err);
   }
 };
-export { getProducts, addProduct, getUserProducts };
+export { getProducts, getProduct, addProduct, getUserProducts };
