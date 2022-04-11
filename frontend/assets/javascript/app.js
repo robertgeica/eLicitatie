@@ -1,5 +1,9 @@
 import { login, logout, register, getUser } from "./api/auth.js";
-import { redirectToPage } from "./utils.js";
+import {
+  redirectToPage,
+  convertDate,
+  getDifferenceBetweenDates,
+} from "./utils.js";
 import {
   getProduct,
   getProducts,
@@ -98,13 +102,15 @@ const renderCard = (auction) => {
       auction.id
     }" />
     <div class="text-content">
-    <h2 data-id="${auction.id}">${auction.name}</h2>
-    <h4>${category}</h4>
-    <div style="display: flex">
-      <span style="margin-right: 10px">Last bid</span>
-      <h4>${0}</h4>
-    </div>
-    <p>${auction.endDate}</p>
+    <h3 data-id="${auction.id}">${auction.name}</h3>
+    <h5>${category}</h5>
+    <p> Last offer:
+      ${auction.offers[auction.offers.length - 1].value}
+    </p>
+    <p>${getDifferenceBetweenDates(
+      auction.startDate,
+      auction.endDate
+    )} days left</p>
     </div>
   </div>
   `;
@@ -183,25 +189,6 @@ for (const auction of auctionContainer) {
 const isAuctionPage =
   window.location.pathname === "/frontend/pages/product.html";
 
-const convertDate = (date) => {
-  const year = date.slice(0, 4);
-  const month = date.slice(5, 7);
-  const day = date.slice(8, 10);
-
-  return `${month}/${day}/${year}`;
-};
-
-const getDifferenceBetweenDates = (startDate, endDate) => {
-  const convertStartDate = convertDate(startDate);
-  const convertEndDate = convertDate(endDate);
-  startDate = new Date(convertStartDate);
-  endDate = new Date(convertEndDate);
-
-  const difference = endDate.getTime() - startDate.getTime();
-  const daysLeft = Math.ceil(difference / (1000 * 3600 * 24));
-  return daysLeft;
-};
-
 const renderProductCategory = (category) => {
   return category.map((c) => c);
 };
@@ -211,8 +198,10 @@ const renderLastOffer = (offers, startPrice) => {
 };
 
 const renderOffers = (offers) => {
-  const offersHTML = offers.reverse().map(offer => `<p class="offer">${offer.value}</p>`);
-  return offersHTML.join('');
+  const offersHTML = offers
+    .reverse()
+    .map((offer) => `<p class="offer">${offer.value}</p>`);
+  return offersHTML.join("");
 };
 
 const renderAuction = (product) => {
