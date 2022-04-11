@@ -33,8 +33,6 @@ const getProduct = async (id) => {
         ...store(),
         product: res,
       });
-      console.log(store());
-
       return res;
     })
     .catch((err) => console.log(err));
