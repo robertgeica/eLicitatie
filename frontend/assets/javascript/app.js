@@ -199,7 +199,7 @@ const renderLastOffer = (offers, startPrice) => {
 
 const renderOffers = (offers) => {
   const offersHTML = offers
-    .reverse()
+    .sort((a, b) => b.value - a.value)
     .map((offer) => `<p class="offer">${offer.value}</p>`);
   return offersHTML.join("");
 };

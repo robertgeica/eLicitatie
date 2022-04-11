@@ -125,10 +125,14 @@ const updateProduct = async (id, product) => {
 }
 
 const addNewOffer = async (product, user, offerPrice) => {
+
+  const hasOffers = product.offers.length > 0;
+  const lastOffer = product.offers.sort((a, b) => b.value - a.value)[0].value;
+
   if (
-    (product.offers.length !== 0 &&
-      offerPrice < product.offers[product.offers.length - 1].value) ||
-    product.startPrice > offerPrice
+    (hasOffers &&
+      parseInt(offerPrice) <= lastOffer) ||
+    product.startPrice > parseInt(offerPrice)
   )
     return console.log(
       "Bid must be higher than the last offer or start price."
