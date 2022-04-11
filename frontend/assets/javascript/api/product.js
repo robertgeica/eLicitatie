@@ -1,6 +1,5 @@
 import { updateUser, getUser } from "./auth.js";
 import { store, setStore } from "../store/store.js";
-
 const getProducts = async () => {
   return fetch("http://localhost:5275/api/product", {
     method: "GET",
@@ -108,4 +107,53 @@ const getUserProducts = async (user) => {
     console.log(err);
   }
 };
-export { getProducts, getProduct, addProduct, getUserProducts };
+
+const updateProduct = async (id, product) => {
+  fetch(`http://localhost:5275/api/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `bearer ${localStorage["auth-token"]}`,
+    },
+    body: JSON.stringify(product),
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
+}
+
+const addNewOffer = async (product, user, offerPrice) => {
+  if (
+    (product.offers.length !== 0 &&
+      offerPrice < product.offers[product.offers.length - 1].value) ||
+    product.startPrice > offerPrice
+  )
+    return console.log(
+      "Bid must be higher than the last offer or start price."
+    );
+
+  const newOffer = {
+    userId: user.id,
+    value: offerPrice,
+    offerId: product.offers.length
+  };
+  const newProduct = {
+    ...product,
+    offers: [...product.offers, newOffer],
+  };
+
+  const newUser = {
+    ...user,
+    offersIds: [
+      ...user.offersIds,
+      { productId: product.id, value: offerPrice },
+    ],
+  };
+
+  await updateProduct(product.id, newProduct);
+  await updateUser(user.id, newUser);
+  
+};
+export { getProducts, getProduct, addProduct, getUserProducts, addNewOffer };
