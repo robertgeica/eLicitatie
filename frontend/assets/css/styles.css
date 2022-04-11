@@ -311,3 +311,10 @@ tr:nth-child(even) {
 .offer:hover {
   background-color: rgb(227, 225, 225);
 }
+
+.product-link {
+  font-weight: 500;
+  color: #064392;
+  cursor: pointer;
+  text-decoration: underline;
+}

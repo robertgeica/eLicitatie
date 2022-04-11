@@ -2,6 +2,7 @@ import { login, logout, register, getUser } from "./api/auth.js";
 import { addProduct, getProducts, getUserProducts } from "./api/product.js";
 import { getCategories } from "./api/category.js";
 import { store, setStore } from "./store/store.js";
+import { getDifferenceBetweenDates, redirectToPage } from "./utils.js";
 
 // update store if userId & auth-token
 if (localStorage["userId"] && localStorage["auth-token"]) {
@@ -23,15 +24,18 @@ if (localStorage["userId"] && localStorage["auth-token"]) {
 const updateProfileInfos = (store) => {
   document.getElementById("userId").innerHTML = store.user.id;
   document.getElementById("userEmail").innerHTML = store.user.email;
-  document.getElementById( "userFullName").innerHTML = `${store.user.firstName} ${store.user.lastName}`;
+  document.getElementById(
+    "userFullName"
+  ).innerHTML = `${store.user.firstName} ${store.user.lastName}`;
   const products = store.userProducts.map(
     (product) => `<span>${product.name}</span>`
   );
   document.getElementById("userProductsIds").innerHTML = products;
 
-  const offers = store.user.offersIds.map(offer => `<span>${offer.value}</span>`)
+  const offers = store.user.offersIds.map(
+    (offer) => `<span>${offer.value}</span>`
+  );
   document.getElementById("userOffersIds").innerHTML = offers;
-
 };
 
 const addNewProduct = (store) => {
@@ -132,13 +136,10 @@ const viewProducts = (store) => {
     (product) =>
       `
     <tr>
-      <td>${product.name}</td>
-      <td>${product.startDate}</td>
-      <td>${product.endDate}</td>
+      <td class="product-link" data-id="${product.id}">${product.name}</td>
+      <td>${getDifferenceBetweenDates(product.startDate, product.endDate)}</td>
       <td>${product.startPrice}</td>
-      <td>${
-        product.offers[product.offers.length - 1] || 0
-      }</td>
+      <td>${product.offers[product.offers.length - 1].value || 0}</td>
       <td>${product.offers.length}</td>
     </tr>
    `
@@ -149,13 +150,12 @@ const viewProducts = (store) => {
       <table>
         <tr>
           <th>Name</th>
-          <th>Start date</th>
-          <th>End date</th>
+          <th>Days left</th>
           <th>Start price</th>
-          <th>Last price</th>
+          <th>Last offer</th>
           <th>Total offers</th>
         </tr>
-        ${tableRows.join('')}
+        ${tableRows.join("")}
       </table>
     </div>`;
 
@@ -171,3 +171,16 @@ if (store().user.id && isUserPage) {
   addNewProduct(store());
   viewProducts(store());
 }
+
+const setProduct = (e) => {
+  const id = e.target.dataset.id;
+  localStorage.setItem("productId", id);
+  redirectToPage("http://127.0.0.1:5500/frontend/pages/product.html");
+};
+
+const links = document.querySelectorAll(".product-link");
+links.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    setProduct(e);
+  });
+});

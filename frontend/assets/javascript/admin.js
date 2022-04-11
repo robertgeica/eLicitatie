@@ -9,14 +9,14 @@ if (localStorage["userId"] && localStorage["auth-token"]) {
   const { id, email, firstName, lastName, role, offersIds, productsIds } = user;
   let categories = await getCategories().then((response) => response);
   let products = await getProducts().then((response) => response);
-  let userProducts = await getUserProducts(user).then((response) => response);
+  // let userProducts = await getUserProducts(user).then((response) => response);
 
   setStore({
     ...store(),
     user: { id, email, firstName, lastName, role, offersIds, productsIds },
     categories: [...categories],
     products: [...products],
-    userProducts: [...userProducts],
+    // userProducts: [...userProducts],
   });
 }
 
