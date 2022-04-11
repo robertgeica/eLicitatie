@@ -1,6 +1,11 @@
 import { login, logout, register, getUser } from "./api/auth.js";
 import { redirectToPage } from "./utils.js";
-import { getProduct, getProducts, getUserProducts } from "./api/product.js";
+import {
+  getProduct,
+  getProducts,
+  getUserProducts,
+  addNewOffer,
+} from "./api/product.js";
 import { getCategories } from "./api/category.js";
 import { store, setStore } from "./store/store.js";
 
@@ -197,18 +202,18 @@ const getDifferenceBetweenDates = (startDate, endDate) => {
   return daysLeft;
 };
 
-const renderProductCategory = category => {
-  return category.map(c => c)
-}
+const renderProductCategory = (category) => {
+  return category.map((c) => c);
+};
 
 const renderLastOffer = (offers, startPrice) => {
-  return offers[offers.length -1] || startPrice;
-}
+  return offers[offers.length - 1].value || startPrice;
+};
 
-const renderOffers = offers => {
-  console.log(offers)
-  return offers
-}
+const renderOffers = (offers) => {
+  const offersHTML = offers.reverse().map(offer => `<p class="offer">${offer.value}</p>`);
+  return offersHTML.join('');
+};
 
 const renderAuction = (product) => {
   const daysLeft = getDifferenceBetweenDates(
@@ -225,24 +230,26 @@ const renderAuction = (product) => {
         <p>Auction id: ${product.id}</p> 
         <p>Category: ${renderProductCategory(product.categories)}</p>
         <p>Days left: ${daysLeft}</p>
+        <p>Start price: ${product.startPrice}</p>
       </div>
 
       <div class="info-input"> 
-        <p>Last offer: ${renderLastOffer(product.offers, product.startPrice)}</p>
+        <p>Last offer: ${renderLastOffer(
+          product.offers,
+          product.startPrice
+        )}</p>
         <input type="text" class="input" id="bid" name="bid">
-        <button class="button">bid</button>
+        <button class="button" id="bid-btn">Bid!</button>
       </div>
     </div>
 
     <div class="auction-description"> ${product.description} </div>
 
     <div class="auction-offers">
-      <p>Start price: ${product.startPrice}</p>
       <p>Offers</p>
       ${renderOffers(product.offers)}
   `;
 };
-
 
 if (isAuctionPage) {
   const productId = localStorage.getItem("productId");
@@ -251,4 +258,14 @@ if (isAuctionPage) {
   document.getElementById("product-container").innerHTML = renderAuction(
     store().product
   );
+
+  document
+    .getElementById("bid-btn")
+    .addEventListener("click", (e) =>
+      addNewOffer(
+        store().product,
+        store().user,
+        document.getElementById("bid").value
+      )
+    );
 }

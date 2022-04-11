@@ -297,3 +297,17 @@ tr:nth-child(even) {
   text-align: center;
   margin: 3em 0;
 }
+
+.auction-offers {
+  padding: .5em;
+}
+
+.offer {
+  margin: .2em 0;
+  padding: 1em;
+  background-color: rgb(232, 232, 232);
+}
+
+.offer:hover {
+  background-color: rgb(227, 225, 225);
+}
