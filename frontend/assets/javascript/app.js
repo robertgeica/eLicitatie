@@ -2,7 +2,8 @@ import { login, logout, register, getUser } from "./api/auth.js";
 import {
   redirectToPage,
   convertDate,
-  getDifferenceBetweenDates, renderLastOffer
+  getDifferenceBetweenDates,
+  renderLastOffer,
 } from "./utils.js";
 import {
   getProduct,
@@ -97,7 +98,7 @@ const renderCard = (auction) => {
     (category) => ` <span>${category}</span>`
   );
   const lastOffer = renderLastOffer(auction.offers, auction.startPrice);
-  
+
   return `
   <div class="auction-container">
     <img src="https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg" width="400" height="200" alt="photo" data-id="${
@@ -195,11 +196,18 @@ const renderProductCategory = (category) => {
   return category.map((c) => c);
 };
 
-
 const renderOffers = (offers) => {
   const offersHTML = offers
     .sort((a, b) => b.value - a.value)
-    .map((offer) => `<p class="offer">${offer.value}</p>`);
+    .map(
+      (offer) => `<div class="offer">
+      <div class="offer-info">
+        <p>${offer.value}</p>
+        <p>${offer.userName}</p>
+      </div>
+      <p>${new Date(parseInt(offer.date)).toLocaleString('ro-RO')}</p>
+    </div>`
+    );
   return offersHTML.join("");
 };
 

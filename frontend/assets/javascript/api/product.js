@@ -123,14 +123,13 @@ const updateProduct = async (id, product) => {
     .then((response) => response.text())
     .then((data) => {
       console.log(data);
-      refreshPage();
+      // refreshPage();
 
     })
     .catch((err) => console.log(err));
 }
 
 const addNewOffer = async (product, user, offerPrice) => {
-  console.log(product.offers)
   const hasOffers = product.offers.length > 0;
   const lastOffer = hasOffers ? product.offers.sort((a, b) => b.value - a.value)[0].value : product.startPrice;
 
@@ -146,7 +145,9 @@ const addNewOffer = async (product, user, offerPrice) => {
   const newOffer = {
     userId: user.id,
     value: offerPrice,
-    offerId: product.offers.length
+    offerId: product.offers.length,
+    userName: user.firstName,
+    date: JSON.stringify(Date.now())
   };
   const newProduct = {
     ...product,
