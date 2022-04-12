@@ -133,16 +133,18 @@ const viewProducts = (store) => {
   };
 
   const tableRows = store.userProducts.map(
-    (product) =>
-      `
-    <tr>
+    (product) => {
+      const lastOffer = product.offers.length === 0 ? 0 : product.offers[product.offers.length - 1].value;
+      return `
+      <tr>
       <td class="product-link" data-id="${product.id}">${product.name}</td>
       <td>${getDifferenceBetweenDates(product.startDate, product.endDate)}</td>
       <td>${product.startPrice}</td>
-      <td>${product.offers[product.offers.length - 1].value || 0}</td>
+      <td>${lastOffer}</td>
       <td>${product.offers.length}</td>
-    </tr>
-   `
+      </tr>
+      `
+    }
   );
 
   const myProductsTable = `

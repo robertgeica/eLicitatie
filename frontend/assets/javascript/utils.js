@@ -22,4 +22,15 @@ const getDifferenceBetweenDates = (startDate, endDate) => {
   return daysLeft;
 };
 
-export { redirectToPage, convertDate, getDifferenceBetweenDates };
+const refreshPage = () => {
+  location.reload();
+}
+
+
+const renderLastOffer = (offers, startPrice) => {
+  const lastOffer = offers.length === 0 ? startPrice : offers[offers.length - 1].value;
+  return lastOffer;
+};
+
+
+export { redirectToPage, convertDate, getDifferenceBetweenDates, refreshPage, renderLastOffer };

@@ -2,7 +2,7 @@ import { login, logout, register, getUser } from "./api/auth.js";
 import {
   redirectToPage,
   convertDate,
-  getDifferenceBetweenDates,
+  getDifferenceBetweenDates, renderLastOffer
 } from "./utils.js";
 import {
   getProduct,
@@ -96,6 +96,8 @@ const renderCard = (auction) => {
   const category = auction.categories.map(
     (category) => ` <span>${category}</span>`
   );
+  const lastOffer = renderLastOffer(auction.offers, auction.startPrice);
+  
   return `
   <div class="auction-container">
     <img src="https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg" width="400" height="200" alt="photo" data-id="${
@@ -105,7 +107,7 @@ const renderCard = (auction) => {
     <h3 data-id="${auction.id}">${auction.name}</h3>
     <h5>${category}</h5>
     <p> Last offer:
-      ${auction.offers[auction.offers.length - 1].value}
+      ${lastOffer}
     </p>
     <p>${getDifferenceBetweenDates(
       auction.startDate,
@@ -193,9 +195,6 @@ const renderProductCategory = (category) => {
   return category.map((c) => c);
 };
 
-const renderLastOffer = (offers, startPrice) => {
-  return offers[offers.length - 1].value || startPrice;
-};
 
 const renderOffers = (offers) => {
   const offersHTML = offers

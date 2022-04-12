@@ -1,5 +1,6 @@
 import { updateUser, getUser } from "./auth.js";
 import { store, setStore } from "../store/store.js";
+import { refreshPage } from "../utils.js";
 const getProducts = async () => {
   return fetch("http://localhost:5275/api/product", {
     method: "GET",
@@ -80,6 +81,8 @@ const addProduct = async (product) => {
         productsIds: [...store().user.productsIds, data.id],
       };
       updateUser(data.userId, newUser);
+      refreshPage();
+
     })
     .catch((err) => console.log(err));
 };
@@ -120,14 +123,16 @@ const updateProduct = async (id, product) => {
     .then((response) => response.text())
     .then((data) => {
       console.log(data);
+      refreshPage();
+
     })
     .catch((err) => console.log(err));
 }
 
 const addNewOffer = async (product, user, offerPrice) => {
-
+  console.log(product.offers)
   const hasOffers = product.offers.length > 0;
-  const lastOffer = product.offers.sort((a, b) => b.value - a.value)[0].value;
+  const lastOffer = hasOffers ? product.offers.sort((a, b) => b.value - a.value)[0].value : product.startPrice;
 
   if (
     (hasOffers &&
@@ -158,6 +163,7 @@ const addNewOffer = async (product, user, offerPrice) => {
 
   await updateProduct(product.id, newProduct);
   await updateUser(user.id, newUser);
+  refreshPage();
   
 };
 export { getProducts, getProduct, addProduct, getUserProducts, addNewOffer };

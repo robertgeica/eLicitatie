@@ -1,3 +1,6 @@
+import { refreshPage } from "../utils.js";
+
+
 const getCategories = async () => {
   return fetch("http://localhost:5275/api/category", {
     method: "GET",
@@ -30,7 +33,7 @@ const addCategory = async (name, subcategories) => {
     body: JSON.stringify(data),
   })
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => refreshPage())
     .catch((err) => console.log(err));
 };
 
@@ -43,7 +46,7 @@ const deleteCategory = async (id) => {
     },
   })
     .then((response) => response.text())
-    .then((data) => {})
+    .then((data) => refreshPage())
     .catch((err) => console.log(err));
 };
 
