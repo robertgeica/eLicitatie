@@ -105,15 +105,15 @@ const renderCard = (auction) => {
       auction.id
     }" />
     <div class="text-content">
-    <h3 data-id="${auction.id}">${auction.name}</h3>
-    <h5>${category}</h5>
-    <p> Last offer:
-      ${lastOffer}
-    </p>
-    <p>${getDifferenceBetweenDates(
-      auction.startDate,
-      auction.endDate
-    )} days left</p>
+      <h3 data-id="${auction.id}">${auction.name}</h3>
+      <h5 data-id="${auction.id}">${category}</h5>
+      <p data-id="${auction.id}"> Last offer:
+        ${lastOffer}
+      </p>
+      <p data-id="${auction.id}">${getDifferenceBetweenDates(
+        auction.startDate,
+        auction.endDate
+      )} days left</p>
     </div>
   </div>
   `;
@@ -205,7 +205,7 @@ const renderOffers = (offers) => {
         <p>${offer.value}</p>
         <p>${offer.userName}</p>
       </div>
-      <p>${new Date(parseInt(offer.date)).toLocaleString('ro-RO')}</p>
+      <p>${new Date(parseInt(offer.date)).toLocaleString("ro-RO")}</p>
     </div>`
     );
   return offersHTML.join("");
