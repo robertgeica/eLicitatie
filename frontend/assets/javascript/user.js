@@ -177,7 +177,7 @@ if (store().user.id && isUserPage) {
 const setProduct = (e) => {
   const id = e.target.dataset.id;
   localStorage.setItem("productId", id);
-  redirectToPage("http://127.0.0.1:5500/frontend/pages/product.html");
+  redirectToPage("http://127.0.0.1:5501/frontend/pages/product.html");
 };
 
 const links = document.querySelectorAll(".product-link");

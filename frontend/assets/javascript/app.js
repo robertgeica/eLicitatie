@@ -43,7 +43,7 @@ const isRegisterPage =
 
 // prevent access to login/register page if user is already logged-in
 if (localStorage["auth-token"] && (isLoginPage || isRegisterPage)) {
-  redirectToPage("http://127.0.0.1:5500/frontend/index.html");
+  redirectToPage("http://127.0.0.1:5501/frontend/index.html");
 }
 
 // get DOM elements for login/register form
@@ -111,9 +111,9 @@ const renderCard = (auction) => {
         ${lastOffer}
       </p>
       <p data-id="${auction.id}">${getDifferenceBetweenDates(
-        auction.startDate,
-        auction.endDate
-      )} days left</p>
+    auction.startDate,
+    auction.endDate
+  )} days left</p>
     </div>
   </div>
   `;
@@ -123,15 +123,21 @@ const auctionCategoriesFilter = document.getElementById(
   "auctions-category-select"
 );
 const renderAuctions = (isFiltered, selectedCategory) => {
+  if (selectedCategory === "all") {
+    isFiltered = false;
+  }
+
   const auctions =
     isFiltered && selectedCategory.length !== 0 ? isFiltered : store().products;
   auctionCategoriesFilter.innerHTML = "";
 
+  const all = `<option value="all">All categories</option>`;
   store().categories.forEach((category, index) => {
     category.subcategories.forEach((subcategory) => {
       const optionSubcategory = `<option value="${subcategory}" ${
         subcategory === selectedCategory ? "selected" : ""
       }>---${subcategory}</option>`;
+
       auctionCategoriesFilter.innerHTML =
         optionSubcategory + auctionCategoriesFilter.innerHTML;
     });
@@ -139,10 +145,11 @@ const renderAuctions = (isFiltered, selectedCategory) => {
     const optionCategory = `<option value="${category.name}" ${
       category.name === selectedCategory ? "selected" : ""
     }>${category.name}</option>`;
+
     auctionCategoriesFilter.innerHTML =
       optionCategory + auctionCategoriesFilter.innerHTML;
   });
-
+  auctionCategoriesFilter.innerHTML = all + auctionCategoriesFilter.innerHTML;
   const cards = auctions.map((auction) => renderCard(auction));
 
   return cards.join("");
@@ -184,7 +191,7 @@ const auctionContainer = document.querySelectorAll(".auction-container");
 for (const auction of auctionContainer) {
   auction.addEventListener("click", (e) => {
     localStorage.setItem("productId", e.target.dataset.id);
-    redirectToPage(`http://127.0.0.1:5500/frontend/pages/product.html`);
+    redirectToPage(`http://127.0.0.1:5501/frontend/pages/product.html`);
   });
 }
 

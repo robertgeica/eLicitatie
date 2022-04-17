@@ -18,7 +18,7 @@ const register = async (email, firstName, lastName, password) => {
     body: JSON.stringify(data),
   })
     .then((response) => response.json())
-    .then((data) => redirectToPage("http://127.0.0.1:5500/frontend/pages/login.html"))
+    .then((data) => redirectToPage("http://127.0.0.1:5501/frontend/pages/login.html"))
     .catch((err) => console.log(err));
 };
 
@@ -40,7 +40,7 @@ const login = async (email, password) => {
       const res = JSON.parse(data);
       localStorage.setItem("auth-token", res.token);
       localStorage.setItem("userId", res.userr.id);
-      redirectToPage("http://127.0.0.1:5500/frontend/index.html");
+      redirectToPage("http://127.0.0.1:5501/frontend/index.html");
     })
     .catch((err) => {
       localStorage.removeItem("auth-token");
@@ -65,14 +65,14 @@ const getUser = async (id) => {
     .catch((err) => {
       localStorage.removeItem("auth-token");
       localStorage.removeItem("userId");
-      redirectToPage("http://127.0.0.1:5500/frontend/pages/login.html");
+      redirectToPage("http://127.0.0.1:5501/frontend/pages/login.html");
     });
 };
 
 const logout = () => {
   localStorage.removeItem("auth-token");
   localStorage.removeItem("userId");
-  redirectToPage("http://127.0.0.1:5500/frontend/pages/login.html");
+  redirectToPage("http://127.0.0.1:5501/frontend/pages/login.html");
 };
 
 const updateUser = (id, newUser) => {
