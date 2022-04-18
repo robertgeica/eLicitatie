@@ -81,10 +81,13 @@ const addProduct = async (product) => {
         productsIds: [...store().user.productsIds, data.id],
       };
       updateUser(data.userId, newUser);
-      refreshPage();
-
     })
     .catch((err) => console.log(err));
+
+    setTimeout(() => {
+      refreshPage();
+    }, 1000);
+
 };
 
 const getUserProducts = async (user) => {

@@ -1,4 +1,4 @@
-import { getProduct } from "./api/product.js";
+import { getProduct, addNewOffer } from "./api/product.js";
 import { store } from "./store/store.js";
 import { getDifferenceBetweenDates, renderLastOffer } from "./utils.js";
 
@@ -6,7 +6,7 @@ const isAuctionPage =
   window.location.pathname === "/frontend/pages/product.html";
 
 const checkEndAuction = (daysLeft) => {
-  if (daysLeft === 0) {
+  if (daysLeft <= 0) {
     return true;
   }
 
