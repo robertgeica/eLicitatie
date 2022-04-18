@@ -199,6 +199,14 @@ for (const auction of auctionContainer) {
 const isAuctionPage =
   window.location.pathname === "/frontend/pages/product.html";
 
+  const checkEndAuction = (daysLeft) => {
+    if(daysLeft === 0) {
+      return true
+    }
+
+    return false;
+  }
+
 const renderProductCategory = (category) => {
   return category.map((c) => c);
 };
@@ -224,6 +232,8 @@ const renderAuction = (product) => {
     product.endDate
   );
 
+  const auctionHasEnded = checkEndAuction(daysLeft);
+
   return `
   
     <div class="auction-info">
@@ -232,7 +242,7 @@ const renderAuction = (product) => {
         <p>${product.name}</p>
         <p>Auction id: ${product.id}</p> 
         <p>Category: ${renderProductCategory(product.categories)}</p>
-        <p>Days left: ${daysLeft}</p>
+        <p>Days left: ${auctionHasEnded ? "Auction has ended!" : daysLeft}</p>
         <p>Start price: ${product.startPrice}</p>
       </div>
 
@@ -242,7 +252,7 @@ const renderAuction = (product) => {
           product.startPrice
         )}</p>
         <input type="text" class="input" id="bid" name="bid">
-        <button class="button" id="bid-btn">Bid!</button>
+        <button class="button" id="bid-btn" ${auctionHasEnded && 'disabled'}>Bid!</button>
       </div>
     </div>
 
@@ -272,3 +282,4 @@ if (isAuctionPage) {
       )
     );
 }
+
